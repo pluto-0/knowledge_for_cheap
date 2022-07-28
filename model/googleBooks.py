@@ -1,10 +1,9 @@
 import json
 import requests
 import pprint
- 
-api_key = 'AIzaSyCliLKFXlBiySoNQAhBgySL4_x5x9f9bk0'
- 
-isbmTest= requests.get('https://www.googleapis.com/books/v1/volumes?q=flowers+isbm:keyes&key='+api_key+'').json()
+import os
+from api import api_key
+
 class Book:
     '''simple class for books'''
     def __init__(self, search):
@@ -33,11 +32,4 @@ class Book:
                 if 'listPrice' in bookInfo['items'][i]['saleInfo']:
                     self.price = bookInfo['items'][i]['saleInfo']['listPrice']['amount']
                 fullInfo.append([self.title, self.author, self.description, self.price])
-        return fullInfo
-
-bookSearch = input('Please give a book title: ')
-bookRequest = Book(bookSearch)
-bookRequest.getbookInfo()
-pprint.pprint(bookRequest.getbookInfo())
-
-#pprint.pprint(isbmTest)
+        pprint.pprint(fullInfo) 
