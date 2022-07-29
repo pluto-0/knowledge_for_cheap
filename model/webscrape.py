@@ -43,4 +43,3 @@ def thriftbooks(title):
     
 
 thriftbooks('it')
-    
