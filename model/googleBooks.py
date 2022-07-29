@@ -32,4 +32,4 @@ class Book:
                 if 'listPrice' in bookInfo['items'][i]['saleInfo']:
                     self.price = bookInfo['items'][i]['saleInfo']['listPrice']['amount']
                 fullInfo.append([self.title, self.author, self.description, self.price])
-        pprint.pprint(fullInfo) 
+        return fullInfo 
