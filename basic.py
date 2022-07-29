@@ -1,10 +1,11 @@
 from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegistrationForm
+from forms import RegistrationForm, LoginForm
 from flask_behind_proxy import FlaskBehindProxy
+from api import secret_key
 
 app = Flask(__name__)
 proxied = FlaskBehindProxy(app)
-app.config['SECRET_KEY'] = 6b2f7f92581b706a2385f72b8d8b090d
+app.config['SECRET_KEY'] = secret_key
 
 @app.route("/")
 @app.route("/home")
