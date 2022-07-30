@@ -603,6 +603,7 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  background-color: #89352a;
 }
 
 @media (min-width: 576px) {
@@ -655,8 +656,8 @@ pre code {
 .col-xl-auto {
   position: relative;
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: -15px;
+  padding-left: -15px;
 }
 
 .col {
@@ -1242,7 +1243,7 @@ pre code {
   }
   .col-lg-3 {
     flex: 0 0 25%;
-    max-width: 25%;
+    max-width: 50%;
   }
   .col-lg-4 {
     flex: 0 0 33.33333%;
@@ -1267,6 +1268,12 @@ pre code {
   .col-lg-9 {
     flex: 0 0 75%;
     max-width: 75%;
+  }
+  div.right-col{
+    position: fixed;
+    top: 160px;
+    right: 50px;
+    width: 360px;
   }
   .col-lg-10 {
     flex: 0 0 83.33333%;
@@ -3930,17 +3937,17 @@ input[type="button"].btn-block {
 }
 
 .nav-link:hover, .nav-link:focus {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 .nav-link.disabled {
-  color: #6c757d;
+  color: #314d65;
   pointer-events: none;
   cursor: default;
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #caaf9c;
 }
 
 .nav-tabs .nav-item {
@@ -3956,7 +3963,7 @@ input[type="button"].btn-block {
 }
 
 .nav-tabs .nav-link.disabled {
-  color: #6c757d;
+  color: #314d65;
   background-color: transparent;
   border-color: transparent;
 }
@@ -3975,7 +3982,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #D19C97;
+  background-color: #743a2f;
 }
 
 .nav-fill > .nav-link,
@@ -5378,7 +5385,9 @@ a.close.disabled {
   overflow: hidden;
   outline: 0;
 }
-
+.logo {
+  color: #312237;
+}
 .modal-dialog {
   position: relative;
   width: auto;
@@ -6103,7 +6112,7 @@ button.bg-primary:focus {
 }
 
 .bg-secondary {
-  background-color: #EDF1FF !important;
+  background-color: #89352a !important;
 }
 
 a.bg-secondary:hover, a.bg-secondary:focus,
@@ -9263,7 +9272,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #D19C97 !important;
+  color: #d4a152 !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -9509,12 +9518,12 @@ a.text-dark:hover, a.text-dark:focus {
   display: inline-block;
   letter-spacing: 1px;
   font-weight: bold;
-  color: #1C1C1C;
+  color: #d4a152;
 }
 
 .section-title span {
   position: relative;
-  background: #ffffff;
+  background: #312237;
   z-index: 1;
 }
 
@@ -9526,7 +9535,7 @@ a.text-dark:hover, a.text-dark:focus {
   width: 100%;
   height: 2px;
   margin-top: -1px;
-  background: #1C1C1C;
+  background: #d4a152;
 }
 
 .offer img {
