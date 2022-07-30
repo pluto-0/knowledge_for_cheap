@@ -9183,6 +9183,13 @@ button.bg-dark:focus {
   text-align: center !important;
 }
 
+#bookInfo {
+  text-align: center !important;
+}
+#title {
+  text-align: center !important;
+  color: 
+}
 @media (min-width: 576px) {
   .text-sm-left {
     text-align: left !important;

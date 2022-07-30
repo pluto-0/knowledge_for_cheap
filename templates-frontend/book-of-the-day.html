@@ -25,7 +25,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body onLoad="showBook()">
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row align-items-center py-3 px-xl-5">
@@ -72,10 +72,13 @@
                     </div>
                 </div>
             </div>
-            <p class="text-center" style="right: 15px; color: #b98d34">
+            <p id="bookInfo" style="right: 15px; color: #b98d34">
                 <br>
-            Book of the day info!
+                Book of the day info!
             </p>
+            <p id="thetitle" style="text-align: center; right: 15px; color: #393941;"></p>
+            <p id="theinfo" style="text-align: center; right: 15px; color: #393941;"></p>
+            <p id="theprice" style="text-align: center; right: 15px; color: #393941;"></p>
         </div>
     </div>
     <!-- Navbar End -->
@@ -228,6 +231,42 @@
     <!-- Products End -->
 
 
+    <!-- Vendor Start -->
+    <!-- <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel vendor-carousel">
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-1.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-2.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-3.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-4.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-5.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-6.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-7.jpg" alt="">
+                    </div>
+                    <div class="vendor-item border p-4">
+                        <img src="img/vendor-8.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Vendor End -->
+
+
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
         <div class="row px-xl-5 pt-5">
@@ -259,6 +298,14 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
+    <!-- My script -->
+    <script>
+        function showBook() {
+            document.getElementById("thetitle").innerHTML= "{{title}}"
+            document.getElementById("theinfo").innerHTML= "{{summary}}"
+            document.getElementById("theprice").innerHTML= "{{price}}"
+        }
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
