@@ -46,7 +46,7 @@ def register():
 
 
 @app.route("/book-of-the-day")
-def bookOfDay():
+def bookOfDay(): # a temporary test run
     return render_template('book-of-the-day.html', title="Chemistry 101", summary="This is a textbook about Chemistry. It is for the introductory course, CHEM 101. blah blah blah", price="$69.00")
 
 
