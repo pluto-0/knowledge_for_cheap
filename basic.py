@@ -14,7 +14,8 @@ proxied = FlaskBehindProxy(app)
 # app.config['SECRET_KEY'] = secret_key
 sec_key = secrets.token_hex(16)
 app.config['SECRET_KEY'] = str(sec_key)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////site.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -43,6 +44,12 @@ def register():
         flash(f'Account created for {form.username.data}!', 'success')
         return redirect(url_for('home'))
     return render_template('register.html', title='Register Here!', form=form)
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit() and 
 
 
 @app.route("/book-of-the-day")
