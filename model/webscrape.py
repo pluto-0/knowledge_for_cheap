@@ -12,6 +12,15 @@ class Book:
         self.pic = pic
 
 
+def is_isbn(title):
+    if len(title) == 10 or len(title) == 13:
+        for letter in title:
+            if letter not in ('0, 1, 2, 3, 4, 5, 6, 7, 8, 9'):
+                return False
+        return True
+    return False
+
+
 def thriftbooks(title):
     url = ("https://www.thriftbooks.com/browse/?b.search="
            + title
@@ -22,16 +31,16 @@ def thriftbooks(title):
     titles = soup.find_all("div", {"class": "AllEditionsItem-tileTitle"})
     pics = soup.find_all("div", {"class": "SearchResultTileItem-photo"})
     authors = soup.find_all("a", {"itemprop": "author"})
-    books = []
+    books = set()
     for i in range(len(prices)):
         try:
-            books.append(Book(titles[i].text,
+            books.add(Book(titles[i].text,
                         authors[i].text,
                         prices[i].text,
                         'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
                         pics[i].find('img')['src']))
         except:
-            books.append(Book(titles[i].text,
+            books.add(Book(titles[i].text,
                         authors[i].text,
                         prices[i].text,
                         'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
