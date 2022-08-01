@@ -39,7 +39,38 @@ def thriftbooks(title):
         finally:
             continue
     return books
-    
-    
 
-thriftbooks('it')
+
+def cheapest_textbooks(title='', isbn=''):
+    # Getting list of isbns, could be different function?
+    isbns = set()
+    if isbn == '':
+        url = 'https://www.cheapesttextbooks.com/IM/?keyval=' + title
+        response = requests.get(url)
+        soup = bs(response.content, "html.parser")
+        tags = soup.find_all('dd', {"class": "isbn10"})
+        for tag in tags:
+            isbns.add(tag.find('a').text)
+    else:
+        isbns.add(isbn)
+    
+    books = set()
+    for isbn in isbns:
+        url = 'https://www.cheapesttextbooks.com/IM/?keyval=' +isbn + '&submit=1'
+        response = requests.get(url)
+        soup = bs(response.content, "html.parser")
+        title = soup.find('h1', {'itemprop': 'name'})
+        author = soup.find('dd', {'class': 'authors first'})
+        pic = soup.find('img', {'class': 'medium'})
+        table = soup.find('table', {'class': 'h price-table'})
+        prices = table.find_all("div", {"class": "g30"})
+        links = table.find_all('a', {'class': 'multi-line-button stopProp'})
+        print(len(prices))
+        [print(len(links))]
+        for i in range(len(prices)):
+            books.add(Book(title.find('a').text,
+                      author.text,
+                      prices[i].find('span', {'class': 'price'}).text,
+                      links[i]['href'],
+                      pic['src']))
+        return books
