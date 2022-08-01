@@ -29,6 +29,7 @@ def make_tables():
               + "book14 text DEFAULT=null,"
               + "book15 text DEFAULT=null);")
     cursor.execute(command)
+    conn.commit()
 
 
 def register(username, email, password):
@@ -109,3 +110,53 @@ def get_user_id(email='', username=''):
     cursor.execute(command, (username,))
     row = cursor.fetchall()[0]
     return row[0]
+
+
+# Returns first open space in wishlist if it exists
+# Returns True if full
+def wishlist_is_full(user_id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    command = ("SELECT * FROM wishlists WHERE user_id=?;")
+    cursor.execute(command, (user_id,))
+    row = cursor.fetchall[0]
+    for i in range(len(row)):
+        if row[i] == None:
+            return i
+    return True
+
+
+def create_wishlist(user_id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    command = ("INSERT INTO wishlists(user_id)"
+               + "VALUES(?);")
+    cursor.execute(command, (user_id,))
+
+
+def insert_book(user_id, isbn):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    index = wishlist_is_full(user_id)
+    if index is True:
+        return False
+    book_num = "book" + str(index+1)
+    command = ("UPDATE wishlists"
+               + "SET " + book_num + " = ?"
+               + "WHERE user_id=?;")
+    cursor.execute(command, (isbn, user_id,))
+    conn.commit()
+
+
+def delete_book(user_id, index):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    index = wishlist_is_full(user_id)
+    if index is True:
+        return False
+    book_num = "book" + str(index+1)
+    command = ("UPDATE wishlists"
+               + "SET " + book_num + " = null"
+               + "WHERE user_id=?;")
+    cursor.execute(command, (user_id,))
+    conn.commit()
