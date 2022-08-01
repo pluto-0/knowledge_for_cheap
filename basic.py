@@ -50,7 +50,12 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        flash(f'Signed in as {form.username.data}!', 'success')
+        if database.login(form.username.data, form.password.data) == (True, True):
+            global id
+            id = database.get_user_id(username=form.username.data)
+            flash(f'Signed in as {form.username.data}!', 'success')
+        else:
+            flash('Incorrect username/password')
         return redirect(url_for('home'))
     return render_template('login.html', form=form)
 

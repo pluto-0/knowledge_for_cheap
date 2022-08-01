@@ -50,13 +50,12 @@ def register(username, email, password):
 def login(username, password):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    command = ("SELECT * FROM users"
-               + "WHERE username=?;")
+    command = ("SELECT * FROM users WHERE username=?")
     cursor.execute(command, (username,))
-    row = cursor.fetchall()[0]
+    row = cursor.fetchall()
     if len(row) == 0:
         return (False, False)
-    if row[2] == password:
+    if row[0][3] == password:
         return (True, True)
     return (True, False)
 
