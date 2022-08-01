@@ -1,7 +1,7 @@
-{% extends "login_layout.html"}
+{% extends "login_layout.html" %}
 {% block content %}
-    <div class="container-fluid pt-5">
-        <div class="text-center mb-4">
+    <div class="container-fluid">
+        <div class="text-center" style="padding-bottom: 0px !important">
             <form method="POST" action="/login">
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group">
@@ -31,25 +31,11 @@
                             {{ form.password(class="form-control form-control-lg") }}
                         {% endif %}
                     </div>
-                    <div class="form-group">
-                        {{ form.confirm_password.label(class="form-control-label") }}
-                        {% if form.confirm_password.errors %}
-                            {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.confirm_password.errors%}
-                                    <span>{{error}}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.confirm_password(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
                 </fieldset>
                 <div class="form-group">
                     {{ form.submit(class="btn btn-outline-info") }}
                 </div>
             </form>
         </div>
-        <div class="row border-top border-light mx-xl-5 py-4"></div>
     </div>
 {% endblock content %}

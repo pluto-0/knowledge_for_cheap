@@ -49,7 +49,10 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    if form.validate_on_submit() and 
+    if form.validate_on_submit():
+        flash(f'Signed in as {form.username.data}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('login.html', form=form)
 
 
 @app.route("/book-of-the-day")
