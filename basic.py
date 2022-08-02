@@ -39,10 +39,11 @@ def register():
                           form.email.data,
                           form.password.data)
         if not registered:
-            print('An account already exists with this username/email')
+            flash('An account already exists with this username/email')
+            return redirect(url_for('user'))
         else:
-            print(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+            flash(f'Account created for {form.username.data}!', 'success')
+            return redirect(url_for('login'))
     return render_template('register.html', title='Register Here!', form=form)
 
 
@@ -54,12 +55,14 @@ def login():
             global id
             id = database.get_user_id(username=form.username.data)
             flash(f'Signed in as {form.username.data}!', 'success')
+            return redirect(url_for('user'))
         else:
             flash('Incorrect username/password')
-        return redirect(url_for('home'))
+            return redirect(url_for('login'))
     return render_template('login.html', form=form)
 
 
+<<<<<<< HEAD
 @app.route("/book-of-the-month")
 def bookOfDay(): # Still a temporary test run. Load app to see the basic layout. Cover images will be chosen and cycled through based on 12 different books of the month
     return render_template('book-of-the-month.html', 
@@ -67,6 +70,21 @@ def bookOfDay(): # Still a temporary test run. Load app to see the basic layout.
                             summary="This is a textbook about Chemistry. It is for the introductory course, CHEM 101. blah blah blah", 
                             price="$69.00",
                             thecover="../static/styles/images/libraryphoto.jpg") # cover image
+=======
+@app.route("/user", methods=['GET', 'POST'])
+def user():
+    if request.method == 'POST':
+        title = request.form['title']
+        books = cheapest_textbooks(title=title)
+        books.update(thriftbooks(title))
+        return render_template('user.html', books=books)
+    return render_template('user.html')
+
+
+@app.route("/book-of-the-day")
+def bookOfDay(): # a temporary test run
+    return render_template('book-of-the-day.html', title="Chemistry 101", summary="This is a textbook about Chemistry. It is for the introductory course, CHEM 101. blah blah blah", price="$69.00")
+>>>>>>> d31e55e (Started work on user page NOT FINISHED)
 
 
 if __name__ == '__main__':
