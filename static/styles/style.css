@@ -230,6 +230,7 @@ label {
   style: width;
   float: left;
   color: white;
+  margin-bottom: 1.5em;
 }
 
 .book_author {
