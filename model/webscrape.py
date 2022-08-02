@@ -37,13 +37,13 @@ def thriftbooks(title):
             try:
                 books.add(Book(titles[i].text,
                             authors[i].text,
-                            prices[i].text,
+                            prices[i].text.strip('?'),
                             'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
                             pics[i].find('img')['src']))
             except:
                 books.add(Book(titles[i].text,
                             authors[i].text,
-                            prices[i].text,
+                            prices[i].text.strip('$'),
                             'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
                             pics[i].find('img')['data-src']))
     return books
@@ -76,7 +76,7 @@ def cheapest_textbooks(title='', isbn=''):
         for i in range(len(prices)):
             books.add(Book(title.find('a').text,
                       author.text,
-                      prices[i].find('span', {'class': 'price'}).text,
+                      prices[i].find('span', {'class': 'price'}).text.strip('?'),
                       links[i]['href'],
                       pic['src']))
         return books

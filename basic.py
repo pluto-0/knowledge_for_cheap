@@ -20,7 +20,6 @@ app.config['SECRET_KEY'] = str(sec_key)
 database.make_tables()
 
 
-
 @app.route("/", methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -43,6 +42,7 @@ def register():
             return redirect(url_for('user'))
         else:
             flash(f'Account created for {form.username.data}!', 'success')
+            database.create_wishlist(database.get_user_id(username=form.username.data))
             return redirect(url_for('login'))
     return render_template('register.html', title='Register Here!', form=form)
 
@@ -79,6 +79,13 @@ def user():
         books.update(thriftbooks(title))
         return render_template('user.html', books=books)
     return render_template('user.html')
+
+
+@app.route('/wishlist', methods=['GET', 'POST'])
+def wishlist():
+    wishlist = database.get_wishlist(id)
+    print(wishlist)
+    return render_template('wishlist.html')
 
 
 @app.route("/book-of-the-day")
