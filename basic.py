@@ -9,7 +9,7 @@ import pandas as pd
 import secrets
 import sys
 sys.path.insert(0, 'model')
-from webscrape import Book, thriftbooks, cheapest_textbooks
+# from webscrape import Book, thriftbooks, cheapest_textbooks
 import database
 
 app = Flask(__name__)
@@ -60,9 +60,13 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route("/book-of-the-day")
-def bookOfDay(): # a temporary test run
-    return render_template('book-of-the-day.html', title="Chemistry 101", summary="This is a textbook about Chemistry. It is for the introductory course, CHEM 101. blah blah blah", price="$69.00")
+@app.route("/book-of-the-month")
+def bookOfDay(): # Still a temporary test run. Load app to see the basic layout. Cover images will be chosen and cycled through based on 12 different books of the month
+    return render_template('book-of-the-month.html', 
+                            title="Chemistry 101", 
+                            summary="This is a textbook about Chemistry. It is for the introductory course, CHEM 101. blah blah blah", 
+                            price="$69.00",
+                            thecover="../static/styles/images/libraryphoto.jpg") # cover image
 
 
 if __name__ == '__main__':

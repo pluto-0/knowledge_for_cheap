@@ -46,7 +46,7 @@ def thriftbooks(title):
                         'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
                         pics[i].find('img')['data-src']))
         finally:
-            continue
+            break
     return books
 
 
