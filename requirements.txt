@@ -12,3 +12,5 @@ flask_sqlalchemy
 pytest
 pycodestyle
 requests==2.27.1
+pandas==1.1.5
+beautifulsoup4==4.11.1
