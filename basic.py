@@ -27,7 +27,7 @@ def home():
         title = request.form['title']
         books = cheapest_textbooks(title=title)
         books.update(thriftbooks(title))
-        return render_template('index.html')
+        return render_template('index.html', books=books)
     return render_template('index.html')
 
 

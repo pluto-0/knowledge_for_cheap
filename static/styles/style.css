@@ -223,6 +223,31 @@ label {
   margin-bottom: 0.5rem;
 }
 
+
+.book {
+  width: 350px;
+  height: 500px;
+  style: width;
+  float: left;
+  color: white;
+}
+
+.book_author {
+  overflow: hidden;
+  max-width: 15ch;
+  text-overflow: ellipsis;
+}
+
+.book_pic {
+  width = 250px;
+  height: 300px;
+}
+
+.book_title {
+  text-overflow: ellipsis;
+  max-width:25ch;
+}
+
 button {
   border-radius: 0;
 }
@@ -604,6 +629,7 @@ pre code {
   margin-right: auto;
   margin-left: auto;
   background-color: #89352a;
+  overflow: auto;
 }
 
 @media (min-width: 576px) {

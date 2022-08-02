@@ -33,20 +33,19 @@ def thriftbooks(title):
     authors = soup.find_all("a", {"itemprop": "author"})
     books = set()
     for i in range(len(prices)):
-        try:
-            books.add(Book(titles[i].text,
-                        authors[i].text,
-                        prices[i].text,
-                        'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
-                        pics[i].find('img')['src']))
-        except:
-            books.add(Book(titles[i].text,
-                        authors[i].text,
-                        prices[i].text,
-                        'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
-                        pics[i].find('img')['data-src']))
-        finally:
-            continue
+        if i < len(titles) and i < len(authors) and i < len(pics):
+            try:
+                books.add(Book(titles[i].text,
+                            authors[i].text,
+                            prices[i].text,
+                            'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
+                            pics[i].find('img')['src']))
+            except:
+                books.add(Book(titles[i].text,
+                            authors[i].text,
+                            prices[i].text,
+                            'https://www.thriftbooks.com/' + titles[i].find('a')['href'],
+                            pics[i].find('img')['data-src']))
     return books
 
 
@@ -74,8 +73,6 @@ def cheapest_textbooks(title='', isbn=''):
         table = soup.find('table', {'class': 'h price-table'})
         prices = table.find_all("div", {"class": "g30"})
         links = table.find_all('a', {'class': 'multi-line-button stopProp'})
-        print(len(prices))
-        [print(len(links))]
         for i in range(len(prices)):
             books.add(Book(title.find('a').text,
                       author.text,
