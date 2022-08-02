@@ -2,7 +2,7 @@ import json
 import requests
 import pprint
 import os
-from api import api_key
+# from api import api_key
 import datetime
 
 class Book:
@@ -18,7 +18,7 @@ class Book:
 
     def getbookInfo(self):
         '''Gets title, author, description and pricing of a book'''
-        bookInfo = requests.get('https://www.googleapis.com/books/v1/volumes?q='+self.search+'+isbm:keyes&key='+api_key+'').json()
+        bookInfo = requests.get('https://www.googleapis.com/books/v1/volumes?q='+self.search+'+isbm:keyes&key='+os.environ['api_key']+'').json()
         for books in bookInfo:
             for i in range(len(bookInfo['items'])):
                 if 'title' in bookInfo['items'][i]['volumeInfo']:
