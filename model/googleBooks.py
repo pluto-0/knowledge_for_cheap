@@ -2,7 +2,6 @@ import json
 import requests
 import pprint
 import os
-# from api import api_key
 import datetime
 
 class Book:
@@ -14,12 +13,12 @@ class Book:
         self.price = None
         self.search = search
         self.img = None
-        self.infoList = []
-
+        self.infoList = [] 
     def getbookInfo(self):
         '''Gets title, author, description and pricing of a book'''
-        bookInfo = requests.get('https://www.googleapis.com/books/v1/volumes?q='+self.search+'+isbm:keyes&key='+os.environ['api_key']+'').json()
+        bookInfo = requests.get('https://www.googleapis.com/books/v1/volumes?q=isbn:'+self.search+'').json()
         for books in bookInfo:
+            
             for i in range(len(bookInfo['items'])):
                 if 'title' in bookInfo['items'][i]['volumeInfo']:
                     self.title = bookInfo['items'][i]['volumeInfo']['title']
@@ -32,30 +31,32 @@ class Book:
                 
                 if 'description' in bookInfo['items'][i]['volumeInfo']:
                     self.description = bookInfo['items'][i]['volumeInfo']['description']
-
-                if 'listPrice' in bookInfo['items'][i]['saleInfo']:
-                    self.price = bookInfo['items'][i]['saleInfo']['listPrice']['amount']
                 
-                if self.title == self.search:
-                    if self.price is not None:
-                        self.infoList.append([self.title, self.author, self.description, self.img, self.price])
-                        break
+                self.infoList.append([self.title, self.author, self.description, self.img, self.price])
         return self.infoList[0]
-            
+
+    def getTitle(self):
+        '''Gets title of a book'''
+        bookInfo = requests.get('https://www.googleapis.com/books/v1/volumes?q=isbn:'+self.search+'').json()
+        for books in bookInfo:
+            for i in range(len(bookInfo['items'])):
+                if 'title' in bookInfo['items'][i]['volumeInfo']:
+                    self.title = bookInfo['items'][i]['volumeInfo']['title']   
+        return self.title
 
 booksOfTheYear = {
-    '1' : 'Beloved',
-    '2' : 'Lord of the Flies',
-    '3' : 'The Hunger Games',
-    '4' : "Charlotte's Web",
-    '5' : 'Coraline',
-    '6' : 'Little Women',
-    '7' : "The Handmaid's Tale ",
-    '8' : 'To Kill a Mockingbird',
-    '9' : 'Moby-Dick',
-    '10' : 'The Kite Runner',
-    '11' : 'The Lord of the Rings',
-    '12' : 'The Maze Runner'
+    '1' : '1-58060-120-0',
+    '2' : '0-571-05686-5',
+    '3' : '978-0-439-02352-8',
+    '4' : "0064400557",
+    '5' : '0-06-113937-8',
+    '6' : '0590225375',
+    '7' : "038549081X",
+    '8' : '9780871299208',
+    '9' : '1509826645',
+    '10' : '9781594631931',
+    '11' : '0544273443',
+    '12' : '978-0-385-73794-4'
 }
 
 def bookOfTheMonth():

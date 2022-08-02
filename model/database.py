@@ -133,6 +133,7 @@ def create_wishlist(user_id):
     command = ("INSERT INTO wishlists(user_id)"
                + "VALUES(?);")
     cursor.execute(command, (user_id,))
+    conn.commit()
 
 
 def insert_book(user_id, isbn):
@@ -161,3 +162,12 @@ def delete_book(user_id, index):
                + "WHERE user_id=?;")
     cursor.execute(command, (user_id,))
     conn.commit()
+
+
+def get_wishlist(user_id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    command = ("SELECT * FROM wishlists WHERE user_id=?")
+    cursor.execute(command, (user_id,))
+    wishlist = cursor.fetchall()[0]
+    return wishlist[2:]
