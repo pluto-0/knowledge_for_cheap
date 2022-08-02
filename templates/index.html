@@ -30,14 +30,14 @@
     <div class="container-fluid">
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href="/home" class="text-decoration-none">
-                    <h3 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary px-1">Knowledge for </span><span class="logo">Cheap</span></h3>
+                <a href="/" class="text-decoration-none">
+                    <h3 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary px-1">Knowledge for</span><span class="logo">Cheap</span></h3>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
-                <form action="">
+                <form method="POST" action="">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for textbooks">
+                        <input name = "title" type="text" class="form-control" placeholder="Search for textbooks">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -48,7 +48,7 @@
             </div>
             <div class="col-lg-3 col-6 text-md-right">
                     <a href="#" class="nav-item nav-link">About Us</a>
-                    <a href="#" class="nav-item nav-link">Login</a>
+                    <a href="/login" class="nav-item nav-link">Login</a>
                     <a href="/register" class="nav-item nav-link">Register</a>
             </div>
         </div>
@@ -56,36 +56,45 @@
     <!-- Topbar End -->
 
 
-    <!-- Navbar Start -->
-    <div class="container-fluid mb-5">
-        <div class="right-col">
-            <div id="header-carousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active" style="height: 270px;">
-                        <img class="img-fluid" src="../static/styles/images/libraryphoto.jpg" alt="Image">
-                        <div class="carousel-caption d-flex flex-column align-items-center justify-content-end">
-                            <div class="p-2" style="max-width: 700px;">
-                                <h4 class="text-light text-uppercase font-weight-medium mb-3">Book of the Day!</h4>
-                                <a href="/book-of-the-day" class="btn btn-light py-2 px-3">Get Info</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p class="text-center" style="right: 15px; color: #b98d34">
-                <br>
-            Book of the day info!
-            </p>
-        </div>
-    </div>
-    <!-- Navbar End -->
-
-
     <!-- Products Start -->
     <div class="container-fluid pt-5">
         <div class="text-center mb-4">
             <h2 class="section-title px-5"><span class="px-2">Get your Textbooks!</span></h2>
         </div>
+        <div class="container-fluid bg-secondary text-dark mt-3 pt-5">
+            <div class="row border-top border-light mx-xl-5 py-1 pb-1"></div>
+            <div class="row px-xl-5 pt-5">
+                <div class="col-lg-2 col-md-3 mb-1 pr-3 pr-xl-5">
+                    <a href="/" class="text-decoration-none">
+                        <h3 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary px-1">Knowledge for</span><span class="px-1 logo">Cheap</span></h3>
+                    </a>
+                    <br>
+                    <p>Some message here about our application's goals, info about our mission, and whatever else.</p>
+                    <p class="mb-5"><a href="#" class="nav-item nav-link">About Us</a></p>
+                </div>
+                <div style="padding-left: 800px !important; padding-bottom: 20px !important;">
+                    <div class="p-2 text-center" style="max-width: 450px;">
+                        <div class="carousel-item active" style="height: 325px;">
+                            <img class="img-fluid" src="../static/styles/images/libraryphoto.jpg" alt="Image" style="max-height: 300px; max-width: 400px;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-end">
+                                <h4 class="text-light text-uppercase font-weight-medium mb-2"><span style="color: #b98d34 !important;">Book of the Month!</span></h4>
+                                <a href="/book-of-the-month" class="btn btn-light py-2 px-3">Get Info</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row border-top border-light mx-xl-5 py-2 pb-1">
+                <div class="col-md-6 px-xl-0">
+                    <p class="mb-md-0 text-center text-md-left text-dark">
+                        &copy; <a class="text-dark font-weight-semi-bold" href="/">Our Site Name</a>. All Rights Reserved. Designed
+                        by
+                        <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
         <!-- <div class="row px-xl-5 pb-3">
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4">
@@ -223,15 +232,12 @@
                     </div>
                 </div>
             </div> -->
-        </div>
-    </div>
+        <!-- </div> -->
     <!-- Products End -->
-
-    <!-- {% block content %} {% endblock %} -->
 
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+    <!-- <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-2 col-md-3 mb-1 pr-3 pr-xl-5">
                 <a href="/home" class="text-decoration-none">
@@ -240,6 +246,11 @@
                 <br>
                 <p>Some message here about our application's goals, info about our mission, and whatever else.</p>
                 <p class="mb-5"><a href="#" class="nav-item nav-link">About Us</a></p>
+            </div>
+            <div class="p-2 text-center" style="max-width: 400px;">
+                <img class="img-fluid" src="../static/styles/images/libraryphoto.jpg" alt="Image" style="max-height: 300px; max-width: 400px;">
+                    <h4 class="text-light text-uppercase font-weight-medium mb-3">Book of the Day!</h4>
+                    <a href="/book-of-the-day" class="btn btn-light py-2 px-3">Get Info</a>
             </div>
         </div>
         <div class="row border-top border-light mx-xl-5 py-4">
@@ -254,13 +265,12 @@
                 <img class="img-fluid" src="../static/styles/images/payments.png" alt="">
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Footer End -->
 
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

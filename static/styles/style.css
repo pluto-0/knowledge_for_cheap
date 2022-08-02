@@ -2592,8 +2592,8 @@ fieldset:disabled a.btn {
 }
 
 .btn-light {
-  color: #212529;
-  background-color: #FFFFFF;
+  color: #b98d34;
+  background-color: #312237;
   border-color: #FFFFFF;
 }
 
@@ -9339,7 +9339,7 @@ a.text-light:hover, a.text-light:focus {
 }
 
 .text-dark {
-  color: #1C1C1C !important;
+  color: #312237 !important;
 }
 
 a.text-dark:hover, a.text-dark:focus {

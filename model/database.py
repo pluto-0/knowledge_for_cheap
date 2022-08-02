@@ -13,21 +13,21 @@ def make_tables():
     command = ("CREATE TABLE IF NOT EXISTS wishlists("
               + "id integer PRIMARY KEY,"
               + "user_id integer,"
-              + "book1 text DEFAULT=null,"
-              + "book2 text DEFAULT=null,"
-              + "book3 text DEFAULT=null,"
-              + "book4 text DEFAULT=null,"
-              + "book5 text DEFAULT=null,"
-              + "book6 text DEFAULT=null,"
-              + "book7 text DEFAULT=null,"
-              + "book8 text DEFAULT=null,"
-              + "book9 text DEFAULT=null,"
-              + "book10 text DEFAULT=null,"
-              + "book11 text DEFAULT=null,"
-              + "book12 text DEFAULT=null,"
-              + "book13 text DEFAULT=null,"
-              + "book14 text DEFAULT=null,"
-              + "book15 text DEFAULT=null);")
+              + "book1 text DEFAULT null,"
+              + "book2 text DEFAULT null,"
+              + "book3 text DEFAULT null,"
+              + "book4 text DEFAULT null,"
+              + "book5 text DEFAULT null,"
+              + "book6 text DEFAULT null,"
+              + "book7 text DEFAULT null,"
+              + "book8 text DEFAULT null,"
+              + "book9 text DEFAULT null,"
+              + "book10 text DEFAULT null,"
+              + "book11 text DEFAULT null,"
+              + "book12 text DEFAULT null,"
+              + "book13 text DEFAULT null,"
+              + "book14 text DEFAULT null,"
+              + "book15 text DEFAULT null);")
     cursor.execute(command)
     conn.commit()
 
@@ -50,13 +50,12 @@ def register(username, email, password):
 def login(username, password):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    command = ("SELECT * FROM users"
-               + "WHERE username=?;")
+    command = ("SELECT * FROM users WHERE username=?")
     cursor.execute(command, (username,))
-    row = cursor.fetchall()[0]
+    row = cursor.fetchall()
     if len(row) == 0:
         return (False, False)
-    if row[2] == password:
+    if row[0][3] == password:
         return (True, True)
     return (True, False)
 
@@ -67,6 +66,7 @@ def username_exists(username):
     command = ("SELECT * FROM users WHERE username=?;")
     cursor.execute(command, (username,))
     rows = cursor.fetchall()
+    print(rows)
     if len(rows) == 0:
         return False
     return True
@@ -78,6 +78,7 @@ def email_exists(email):
     command = ("SELECT * FROM users WHERE email=?;")
     cursor.execute(command, (email,))
     rows = cursor.fetchall()
+    print(rows)
     if len(rows) == 0:
         return False
     return True
