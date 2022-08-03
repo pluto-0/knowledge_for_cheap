@@ -34,6 +34,7 @@ class Book:
                 
                 self.infoList.append([self.title, self.author, self.description, self.img, self.price])
         return self.infoList[0]
+        
 
     def getTitle(self):
         '''Gets title of a book'''
@@ -43,6 +44,7 @@ class Book:
                 if 'title' in bookInfo['items'][i]['volumeInfo']:
                     self.title = bookInfo['items'][i]['volumeInfo']['title']   
         return self.title
+
 
 booksOfTheYear = {
     '1' : '1-58060-120-0',

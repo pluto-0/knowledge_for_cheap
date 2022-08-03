@@ -9,7 +9,8 @@ import pandas as pd
 import secrets
 import sys
 sys.path.insert(0, 'model')
-# from webscrape import Book, thriftbooks, cheapest_textbooks
+from webscrape import Book, thriftbooks, cheapest_textbooks, is_isbn
+import googleBooks
 import database
 
 app = Flask(__name__)
@@ -24,8 +25,11 @@ database.make_tables()
 def home():
     if request.method == 'POST':
         title = request.form['title']
+        if is_isbn(title):
+            title_2 = googleBooks.Book(title).getTitle()
+        print(title_2)
         books = cheapest_textbooks(title=title)
-        books.update(thriftbooks(title))
+        books.update(thriftbooks(title_2))
         return render_template('index.html', books=books)
     return render_template('index.html')
 
@@ -60,6 +64,7 @@ def login():
             flash('Incorrect username/password')
             return redirect(url_for('login'))
     return render_template('login.html', form=form)
+
 
 
 @app.route("/book-of-the-month")
