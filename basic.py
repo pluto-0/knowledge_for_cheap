@@ -66,6 +66,16 @@ def login():
     return render_template('login.html', form=form)
 
 
+
+@app.route("/book-of-the-month")
+def bookOfMonth(): # Still a temporary test run. Load app to see the basic layout. Cover images will be chosen and cycled through based on 12 different books of the month
+    return render_template('book-of-the-month.html', 
+                            title="Chemistry 101", 
+                            summary="This is a textbook about Chemistry. It is for the introductory course, CHEM 101. blah blah blah", 
+                            price="$69.00",
+                            thecover="../static/styles/images/libraryphoto.jpg") # cover image
+
+
 @app.route("/user", methods=['GET', 'POST'])
 def user():
     if request.method == 'POST':
@@ -81,11 +91,6 @@ def wishlist():
     wishlist = database.get_wishlist(id)
     print(wishlist)
     return render_template('wishlist.html')
-
-
-@app.route("/book-of-the-day")
-def bookOfDay(): # a temporary test run
-    return render_template('book-of-the-day.html', title="Chemistry 101", summary="This is a textbook about Chemistry. It is for the introductory course, CHEM 101. blah blah blah", price="$69.00")
 
 
 if __name__ == '__main__':
