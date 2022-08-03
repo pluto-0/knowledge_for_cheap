@@ -41,6 +41,16 @@ class Book:
                         self.infoList.append([self.title, self.author, self.description, self.img, self.price])
                         break
         return self.infoList[0]
+    
+
+    def getTitle(self):
+        '''Gets title of a book'''
+        bookInfo = requests.get('https://www.googleapis.com/books/v1/volumes?q=isbn:'+self.search+'').json()
+        for books in bookInfo:
+            for i in range(len(bookInfo['items'])):
+                if 'title' in bookInfo['items'][i]['volumeInfo']:
+                    self.title = bookInfo['items'][i]['volumeInfo']['title']   
+        return self.title
             
 
 booksOfTheYear = {
