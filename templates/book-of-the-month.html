@@ -25,7 +25,7 @@
     <link href="../static/styles/style.css" rel="stylesheet">
 </head>
 
-<body onload="showBook()">
+<body onload="showBook()" class="container-fluid">
 
     <div class="container-fluid">
         <div class="row align-items-center py-3 px-xl-5">
@@ -47,16 +47,30 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-md-right">
-                    <a href="#" class="nav-item nav-link">About Us</a>
+                    <a href="/about-us" class="nav-item nav-link">About Us</a>
                     <a href="/login" class="nav-item nav-link">Login</a>
                     <a href="/register" class="nav-item nav-link">Register</a>
             </div>
         </div>
     </div>
 
+
     <div class="container-fluid pt-5">
         <div class="text-center mb-4">
             <h2 class="section-title px-5"><span class="px-2">Get your Textbooks!</span></h2>
+        </div>
+        <div class="container-fluid bg-secondary text-dark mt-3 pt-5">
+            <div class="books">
+                {% for book in books %}
+                <div class ="book">
+                    <p class = "book_title"> {{book.title}}</p>
+                    <p class = "book_author">{{book.author}}</p>
+                    <p class = "book_price"> ${{book.price}} </p>
+                    <p class = "book_link"><a href={{book.link}}>LINK</a></p>
+                    <img class="book_pic" src = {{book.pic}}>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         <div class="container-fluid bg-secondary text-dark mt-3 pt-5">
             <div class="row border-top border-light mx-xl-5 py-1 pb-1"></div>
@@ -67,10 +81,10 @@
                     </a>
                     <br>
                     <p>Some message here about our application's goals, info about our mission, and whatever else.</p>
-                    <p class="mb-5"><a href="#" class="nav-item nav-link">About Us</a></p>
+                    <p class="mb-5"><a href="/about-us" class="nav-item nav-link">About Us</a></p>
                 </div>
-                <div style="padding-left: 800px !important; padding-bottom: 20px !important;">
-                    <div class="p-2 text-center" style="max-width: 450px; padding-top: 10px !important;">
+                <div style="padding-left: 700px !important; padding-bottom: 20px !important;">
+                    <div class="p-2 text-center" style="max-width: 450px;">
                         <div class="carousel-item active" style="height: 650px;">
                             <img class="img-fluid" src="../static/styles/images/libraryphoto.jpg" alt="Image" style="max-height: 300px; max-width: 432px;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-end">
