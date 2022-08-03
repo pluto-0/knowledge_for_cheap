@@ -223,7 +223,9 @@ label {
   margin-bottom: 0.5rem;
 }
 
-
+.books {
+  margin-bottom: 35em;
+}
 .book {
   width: 350px;
   height: 500px;
