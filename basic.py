@@ -10,6 +10,7 @@ sys.path.insert(0, 'model')
 from webscrape import Book, thriftbooks, cheapest_textbooks, is_isbn
 import googleBooks
 import database
+import cgi
 
 app = Flask(__name__)
 sec_key = secrets.token_hex(16)
@@ -21,11 +22,12 @@ database.make_tables()
 def home():
     if request.method == 'POST':
         title = request.form['title']
+        books = cheapest_textbooks(title=title)
         if is_isbn(title):
             title_2 = googleBooks.Book(title).getTitle()
-        print(title_2)
-        books = cheapest_textbooks(title=title)
-        books.update(thriftbooks(title_2))
+            books.update(thriftbooks(title_2))
+        else:
+            books.update(thriftbooks(title))
         return render_template('index.html', books=books)
     return render_template('index.html')
 
@@ -52,8 +54,8 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         if database.login(form.username.data, form.password.data) == (True, True):
-            global id
-            id = database.get_user_id(username=form.username.data)
+            global user_id
+            user_id = database.get_user_id(username=form.username.data)
             flash(f'Signed in as {form.username.data}!', 'success')
             return redirect(url_for('user'))
         else:
@@ -88,11 +90,25 @@ def user():
     return render_template('user.html')
 
 
+@app.route('/user/add_wishlist', methods=['GET', 'POST'])
+def add_wishlist():
+    title = request.form.get('title')
+    database.insert_book(user_id, title)
+    return redirect(url_for('user'))
+
+
 @app.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
-    wishlist = database.get_wishlist(id)
-    print(wishlist)
-    return render_template('wishlist.html')
+    wishlist = database.get_wishlist(user_id)
+    return render_template('wishlist.html', wishlist=wishlist)
+
+
+@app.route('/wishlist/remove_wishlist', methods=['GET', 'POST'])
+def remove_wishlist():
+    title = request.form.get('title')
+    print(title)
+    database.delete_book(user_id, title)
+    return redirect(url_for('wishlist'))
 
 
 @app.route("/about-us")

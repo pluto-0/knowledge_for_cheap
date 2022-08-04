@@ -143,6 +143,22 @@ sup {
   vertical-align: baseline;
 }
 
+
+.wishlist {
+  margin-bottom: 1em;
+  overflow: hidden;
+}
+
+.wishlist_book {
+  color: white;
+  width: 250px;
+  height: 75px;
+  max-width: 250px;
+  style: width;
+  float: left;
+}
+
+
 sub {
   bottom: -.25em;
 }
@@ -261,6 +277,7 @@ label {
 .book_title {
   text-overflow: ellipsis;
   max-width:25ch;
+  color: white;
 }
 
 button {
