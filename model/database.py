@@ -1,4 +1,5 @@
 import sqlite3
+import webscrape
 
 
 def make_tables():
@@ -66,7 +67,6 @@ def username_exists(username):
     command = ("SELECT * FROM users WHERE username=?;")
     cursor.execute(command, (username,))
     rows = cursor.fetchall()
-    print(rows)
     if len(rows) == 0:
         return False
     return True
@@ -78,7 +78,6 @@ def email_exists(email):
     command = ("SELECT * FROM users WHERE email=?;")
     cursor.execute(command, (email,))
     rows = cursor.fetchall()
-    print(rows)
     if len(rows) == 0:
         return False
     return True
@@ -120,7 +119,7 @@ def wishlist_is_full(user_id):
     cursor = conn.cursor()
     command = ("SELECT * FROM wishlists WHERE user_id=?;")
     cursor.execute(command, (user_id,))
-    row = cursor.fetchall[0]
+    row = cursor.fetchall()[0]
     for i in range(len(row)):
         if row[i] == None:
             return i
@@ -136,29 +135,41 @@ def create_wishlist(user_id):
     conn.commit()
 
 
-def insert_book(user_id, isbn):
+def insert_book(user_id, title):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     index = wishlist_is_full(user_id)
     if index is True:
         return False
-    book_num = "book" + str(index+1)
-    command = ("UPDATE wishlists"
-               + "SET " + book_num + " = ?"
-               + "WHERE user_id=?;")
-    cursor.execute(command, (isbn, user_id,))
+    book_num = "book" + str(index-1)
+    command = ("UPDATE wishlists "
+               + "SET " + book_num + "=? "
+               + "WHERE user_id=?")
+    print(command)
+    cursor.execute(command, (title, user_id,))
     conn.commit()
 
 
-def delete_book(user_id, index):
+def get_index(user_id, title):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
-    index = wishlist_is_full(user_id)
-    if index is True:
-        return False
-    book_num = "book" + str(index+1)
-    command = ("UPDATE wishlists"
-               + "SET " + book_num + " = null"
+    command = ("SELECT * FROM wishlists WHERE user_id=?;")
+    cursor.execute(command, (user_id,))
+    row = cursor.fetchall()[0]
+    for i in range(len(row)):
+        if row[i] == title:
+            return i-1
+    return 16
+
+
+def delete_book(user_id, title):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    index = get_index(user_id, title)
+    book_num = "book" + str(index)
+    print(book_num)
+    command = ("UPDATE wishlists "
+               + "SET " + book_num + "=null "
                + "WHERE user_id=?;")
     cursor.execute(command, (user_id,))
     conn.commit()
@@ -169,5 +180,11 @@ def get_wishlist(user_id):
     cursor = conn.cursor()
     command = ("SELECT * FROM wishlists WHERE user_id=?")
     cursor.execute(command, (user_id,))
-    wishlist = cursor.fetchall()[0]
-    return wishlist[2:]
+    wishlist = list(cursor.fetchall()[0])[2:]
+    while None in wishlist:
+        wishlist.remove(None)
+    books = set()
+    for book in wishlist:
+        books.update(webscrape.cheapest_textbooks(book))
+        books.update(webscrape.thriftbooks(book))
+    return (wishlist, books)

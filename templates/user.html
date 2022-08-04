@@ -70,7 +70,9 @@
                     <p class = "book_author">{{book.author}}</p>
                     <p class = "book_price"> ${{book.price}} </p>
                     <p class = "book_link"><a href={{book.link}}>LINK</a>
-                        <button type="button">Add to wishlist</button>
+                        <form method="POST" action="">
+                            <input type="button" onclick="send_title(event, '{{book.title}}')" name="title" value="Add to wishlist">
+                        </form>
                     </p>
                     <img class="book_pic" src = {{book.pic}}> 
                 </div>
@@ -288,6 +290,16 @@
 
 
     <!-- JavaScript Libraries -->
+    <script>
+        function send_title(event, title) {
+            let xmlhttp = new XMLHttpRequest()
+            xmlhttp.open("POST", window.location.href + "/add_wishlist", true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("title=" + title);
+            event.preventDefault();
+            alert(Title + ' added to wishlist')
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="../static/lib/easing/easing.min.js"></script>

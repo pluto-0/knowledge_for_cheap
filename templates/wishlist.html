@@ -37,11 +37,7 @@
             <div class="col-lg-6 col-6 text-left">
                 <form method="POST" action="">
                     <div class="input-group">
-                        <input name = "title" type="text" class="form-control" placeholder="Search for textbooks">
                         <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
                         </div>
                     </div>
                 </form>
@@ -62,17 +58,24 @@
         <div class="text-center mb-4">
             <h2 class="section-title px-5"><span class="px-2">Get your Textbooks!</span></h2>
         </div>
+        <div class="wishlist">
+            {%for book in wishlist[0] %} 
+                <div class="wishlist_book">
+                    <p class="book_title">{{book}}</p>
+                    <form method="POST" action="">
+                        <input type="button" onclick="send_title(event, '{{book}}')" name="title" value="Remove from wishlist">
+                    </form>
+                </div>
+            {%endfor%}
+        </div>
         <div class="container-fluid bg-secondary text-dark mt-3 pt-5">
             <div class="books">
-                {% for book in books %}
+                {% for book in wishlist[1] %}
                 <div class ="book">
                     <p class = "book_title"> {{book.title}}</p>
                     <p class = "book_author">{{book.author}}</p>
                     <p class = "book_price"> ${{book.price}} </p>
-                    <p class = "book_link"><a href={{book.link}}>LINK</a>
-                        <input type="submit" name="submit_button" value={{book.title}}>
-                        <button type="button">Add to wishlist</button>
-                    </p>
+                    <p class = "book_link"><a href={{book.link}}>LINK</a></p>
                     <img class="book_pic" src = {{book.pic}}> 
                 </div>
                 {% endfor %}
@@ -289,6 +292,16 @@
 
 
     <!-- JavaScript Libraries -->
+    <script>
+        function send_title(event, title) {
+            let xmlhttp = new XMLHttpRequest()
+            xmlhttp.open("POST", window.location.href + "/remove_wishlist", true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlhttp.send("title=" + title);
+            event.preventDefault();
+            alert(title + ' removed from wishlist')
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="../static/lib/easing/easing.min.js"></script>
