@@ -64,19 +64,22 @@ def cheapest_textbooks(title='', isbn=''):
     
     books = set()
     for isbn in isbns:
-        url = 'https://www.cheapesttextbooks.com/IM/?keyval=' +isbn + '&submit=1'
-        response = requests.get(url)
-        soup = bs(response.content, "html.parser")
-        title = soup.find('h1', {'itemprop': 'name'})
-        author = soup.find('dd', {'class': 'authors first'})
-        pic = soup.find('img', {'class': 'medium'})
-        table = soup.find('table', {'class': 'h price-table'})
-        prices = table.find_all("div", {"class": "g30"})
-        links = table.find_all('a', {'class': 'multi-line-button stopProp'})
-        for i in range(len(prices)):
-            books.add(Book(title.find('a').text,
-                      author.text,
-                      prices[i].find('span', {'class': 'price'}).text.strip('?'),
-                      links[i]['href'],
-                      pic['src']))
-        return books
+        try:
+            url = 'https://www.cheapesttextbooks.com/IM/?keyval=' +isbn + '&submit=1'
+            response = requests.get(url)
+            soup = bs(response.content, "html.parser")
+            title = soup.find('h1', {'itemprop': 'name'})
+            author = soup.find('dd', {'class': 'authors first'})
+            pic = soup.find('img', {'class': 'medium'})
+            table = soup.find('table', {'class': 'h price-table'})
+            prices = table.find_all("div", {"class": "g30"})
+            links = table.find_all('a', {'class': 'multi-line-button stopProp'})
+            for i in range(len(prices)):
+                books.add(Book(title.find('a').text,
+                        author.text,
+                        prices[i].find('span', {'class': 'price'}).text.strip('?'),
+                        links[i]['href'],
+                        pic['src']))
+            return books
+        except:
+            return books
