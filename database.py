@@ -9,26 +9,26 @@ def make_tables():
                + "id integer PRIMARY KEY,"
                + "username text,"
                + "email text,"
-               + "password text);" )
+               + "password text);")
     cursor.execute(command)
     command = ("CREATE TABLE IF NOT EXISTS wishlists("
-              + "id integer PRIMARY KEY,"
-              + "user_id integer,"
-              + "book1 text DEFAULT null,"
-              + "book2 text DEFAULT null,"
-              + "book3 text DEFAULT null,"
-              + "book4 text DEFAULT null,"
-              + "book5 text DEFAULT null,"
-              + "book6 text DEFAULT null,"
-              + "book7 text DEFAULT null,"
-              + "book8 text DEFAULT null,"
-              + "book9 text DEFAULT null,"
-              + "book10 text DEFAULT null,"
-              + "book11 text DEFAULT null,"
-              + "book12 text DEFAULT null,"
-              + "book13 text DEFAULT null,"
-              + "book14 text DEFAULT null,"
-              + "book15 text DEFAULT null);")
+               + "id integer PRIMARY KEY,"
+               + "user_id integer,"
+               + "book1 text DEFAULT null,"
+               + "book2 text DEFAULT null,"
+               + "book3 text DEFAULT null,"
+               + "book4 text DEFAULT null,"
+               + "book5 text DEFAULT null,"
+               + "book6 text DEFAULT null,"
+               + "book7 text DEFAULT null,"
+               + "book8 text DEFAULT null,"
+               + "book9 text DEFAULT null,"
+               + "book10 text DEFAULT null,"
+               + "book11 text DEFAULT null,"
+               + "book12 text DEFAULT null,"
+               + "book13 text DEFAULT null,"
+               + "book14 text DEFAULT null,"
+               + "book15 text DEFAULT null);")
     cursor.execute(command)
     conn.commit()
 
@@ -39,7 +39,7 @@ def register(username, email, password):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     command = ("INSERT INTO users(username, email, password)"
-              + "VALUES(?, ?, ?);")
+               + "VALUES(?, ?, ?);")
     cursor.execute(command, (username, email, password,))
     conn.commit()
     return True
@@ -121,7 +121,7 @@ def wishlist_is_full(user_id):
     cursor.execute(command, (user_id,))
     row = cursor.fetchall()[0]
     for i in range(len(row)):
-        if row[i] == None:
+        if row[i] is None:
             return i
     return True
 

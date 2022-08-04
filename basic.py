@@ -6,7 +6,7 @@ import json
 import pandas as pd
 import secrets
 import sys
-sys.path.insert(0, 'model')
+# sys.path.insert(0, 'model')
 from webscrape import Book, thriftbooks, cheapest_textbooks, is_isbn
 import googleBooks
 import database
@@ -37,14 +37,16 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         registered = database.register(form.username.data,
-                          form.email.data,
-                          form.password.data)
+                                       form.email.data,
+                                       form.password.data)
         if not registered:
             flash('An account already exists with this username/email')
             return redirect(url_for('user'))
         else:
             flash(f'Account created for {form.username.data}!', 'success')
-            database.create_wishlist(database.get_user_id(username=form.username.data))
+            database.create_wishlist(
+                                    database.
+                                    get_user_id(username=form.username.data))
             return redirect(url_for('login'))
     return render_template('register.html', title='Register Here!', form=form)
 
@@ -53,7 +55,9 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if database.login(form.username.data, form.password.data) == (True, True):
+        if database.login(
+                          form.username.data,
+                          form.password.data) == (True, True):
             global user_id
             user_id = database.get_user_id(username=form.username.data)
             flash(f'Signed in as {form.username.data}!', 'success')
@@ -64,20 +68,19 @@ def login():
     return render_template('login.html', form=form)
 
 
-
 @app.route("/book-of-the-month")
 def bookOfMonth():
     book = googleBooks.bookOfTheMonth()
     price = book[4]
-    if price == None:
+    if price is None:
         book[4] = '15.99'
     return render_template('book-of-the-month.html',
-                            title=book[0],
-                            summary=book[2],
-                            price=book[4],
-                            author=book[1][0],
-                            thecover=book[3]
-                            )
+                           title=book[0],
+                           summary=book[2],
+                           price=book[4],
+                           author=book[1][0],
+                           thecover=book[3]
+                           )
 
 
 @app.route("/user", methods=['GET', 'POST'])
