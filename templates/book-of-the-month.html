@@ -46,11 +46,9 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 col-6 text-md-right">
-                    <a href="/about-us" class="nav-item nav-link">About Us</a>
-                    <a href="/login" class="nav-item nav-link">Login</a>
-                    <a href="/register" class="nav-item nav-link">Register</a>
-            </div>
+            <a href="/about-us" class="nav-item nav-link">About Us</a>
+            <a href="/login" class="nav-item nav-link">Login</a>
+            <a href="/register" class="nav-item nav-link">Register</a>
         </div>
     </div>
 
@@ -85,13 +83,14 @@
                 </div>
                 <div style="padding-left: 700px !important; padding-bottom: 20px !important;">
                     <div class="p-2 text-center" style="max-width: 450px;">
-                        <div class="carousel-item active" style="height: 650px;">
+                        <div class="carousel-item active" style="height: 950px;">
                             <img class="img-fluid" src="../static/styles/images/libraryphoto.jpg" alt="Image" style="max-height: 300px; max-width: 432px;">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-end">
                                 <h4 class="text-light text-uppercase font-weight-medium mb-3"><span style="color: #b98d34 !important;">Book of the Month!</span></h4>
                                 <a href="/book-of-the-month" class="btn btn-light py-2 px-3">Get Info</a>
+                                <br>
                                 <img id="thecover" src="{{thecover}}" alt="Image" style="max-height: 150px; max-width: 216px; padding-top: 20px !important;"><br>
-                                <span style="color: #baac91 !important">
+                                <span style="color: #caaf9c !important">
                                     <p id="thetitle"></p>
                                     <p id="thedescription"></p>
                                     <p id="theprice"></p>
@@ -99,15 +98,12 @@
                             </div>
                         </div>
                     </div>
-                    <p id="thetitle"></p>
-                    <p id="thedescription"></p>
-                    <p id="theprice"></p>
                 </div>
             </div>
             <div class="row border-top border-light mx-xl-5 py-2 pb-1">
                 <div class="col-md-6 px-xl-0">
                     <p class="mb-md-0 text-center text-md-left text-dark">
-                        &copy; <a class="text-dark font-weight-semi-bold" href="/">Our Site Name</a>. All Rights Reserved. Designed
+                        &copy; <a class="text-dark font-weight-semi-bold" href="/">Knowledge for Cheap</a>. All Rights Reserved. Designed
                         by
                         <a class="text-dark font-weight-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
                     </p>
@@ -122,9 +118,9 @@
     <!-- My Script -->
     <script>
         function showBook() {
-            document.getElementById("thetitle").innerHTML= "{{title}}"
+            document.getElementById("thetitle").innerHTML= "{{title}} by {{author}}"
             document.getElementById("thedescription").innerHTML= "{{summary}}"
-            document.getElementById("theprice").innerHTML= "{{price}}"
+            document.getElementById("theprice").innerHTML= "${{price}}"
             document.getElementById("thecover").innerHTML= "{{cover}}"
         }
     </script>

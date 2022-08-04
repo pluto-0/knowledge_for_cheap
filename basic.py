@@ -1,8 +1,6 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
 from forms import RegistrationForm, LoginForm
-#from flask_behind_proxy import FlaskBehindProxy
 from flask_sqlalchemy import SQLAlchemy
-# from api import secret_key
 import requests
 import json
 import pandas as pd
@@ -14,8 +12,6 @@ import googleBooks
 import database
 
 app = Flask(__name__)
-#proxied = FlaskBehindProxy(app)
-# app.config['SECRET_KEY'] = secret_key
 sec_key = secrets.token_hex(16)
 app.config['SECRET_KEY'] = str(sec_key)
 database.make_tables()
@@ -68,12 +64,18 @@ def login():
 
 
 @app.route("/book-of-the-month")
-def bookOfMonth(): # Still a temporary test run. Load app to see the basic layout. Cover images will be chosen and cycled through based on 12 different books of the month
-    return render_template('book-of-the-month.html', 
-                            title="Chemistry 101", 
-                            summary="This is a textbook about Chemistry. It is for the introductory course, CHEM 101. blah blah blah", 
-                            price="$69.00",
-                            thecover="../static/styles/images/libraryphoto.jpg") # cover image
+def bookOfMonth():
+    book = googleBooks.bookOfTheMonth()
+    price = book[4]
+    if price == None:
+        book[4] = '15.99'
+    return render_template('book-of-the-month.html',
+                            title=book[0],
+                            summary=book[2],
+                            price=book[4],
+                            author=book[1][0],
+                            thecover=book[3]
+                            )
 
 
 @app.route("/user", methods=['GET', 'POST'])

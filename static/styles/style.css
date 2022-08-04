@@ -227,7 +227,12 @@ label {
   width: 200px !important;
   height: 200px !important;
   border-radius: 360px;
-  box-shadow: -1px 2px 5px 1px #312237;
+  box-shadow: -1px 2px 5px 1px #b98d34;
+}
+
+.about-us-text {
+  text-align: center;
+  color: #4d7a9b;
 }
 
 .books {
@@ -2406,9 +2411,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #d4a152;
-  background-color: #672c1a;
-  border-color: #672c1a;
+  color: #3a5e52;
+  background-color: #663306;
+  border-color: #312237;
 }
 
 .btn-primary:hover {
@@ -2634,15 +2639,15 @@ fieldset:disabled a.btn {
 }
 
 .btn-light:hover {
-  color: #212529;
-  background-color: #ececec;
-  border-color: #e6e6e6;
+  color: #312237;
+  background-color: #b98d34;
+  border-color: #FFFFFF;
 }
 
 .btn-light:focus, .btn-light.focus {
-  color: #212529;
-  background-color: #ececec;
-  border-color: #e6e6e6;
+  color: #b98d34;
+  background-color: #312237;
+  border-color: #FFFFFF;
   box-shadow: 0 0 0 0.2rem rgba(222, 222, 223, 0.5);
 }
 
